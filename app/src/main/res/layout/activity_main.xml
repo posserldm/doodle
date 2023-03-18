@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <posserldm.doodle.panit.MainPaintSurfaceView
+    <posserldm.doodle.panit.MainPaintView
         android:background="@color/white"
         android:id="@+id/main_paint"
         android:layout_width="match_parent"
