@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
@@ -98,6 +97,7 @@ class MainPaintView @JvmOverloads constructor(
                 put(MediaStore.Images.Media.RELATIVE_PATH, "${Environment.DIRECTORY_PICTURES}${File.separator}Doodle")
                 put(MediaStore.Images.Media.IS_PENDING, 1)
             }
+
         }
 
         val resolver = context?.contentResolver
