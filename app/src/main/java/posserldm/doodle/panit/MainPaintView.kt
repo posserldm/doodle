@@ -20,6 +20,7 @@ class MainPaintView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private var path: Path = Path()
+    var isAllowDrawing = true
 
     /**
      * color：设置画笔颜色。
@@ -42,18 +43,20 @@ class MainPaintView @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
-            MotionEvent.ACTION_DOWN -> {
-                path.moveTo(event.x, event.y)
+        if (isAllowDrawing) {
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    path.moveTo(event.x, event.y)
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    path.lineTo(event.x, event.y)
+                }
+                MotionEvent.ACTION_UP -> {
+                    path.lineTo(event.x, event.y)
+                }
             }
-            MotionEvent.ACTION_MOVE -> {
-                path.lineTo(event.x, event.y)
-            }
-            MotionEvent.ACTION_UP -> {
-                path.lineTo(event.x, event.y)
-            }
+            invalidate()
         }
-        invalidate()
         return true
     }
 
