@@ -7,31 +7,43 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import posserldm.doodle.databinding.ActivityMainBinding
+import posserldm.doodle.tools.fragment.PaintToolPanelFragment
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val toolContentPanel: PaintToolPanelFragment by lazy {
+        PaintToolPanelFragment()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initEvents()
-
+        initToolViewPage()
+        // here are test code
     }
 
     private fun initEvents() {
         // 画笔工具面板开合事件
         binding.toolNavPaintTool.setOnClickListener {
             if (binding.toolContent.visibility == View.VISIBLE) {
-                binding.mainContent.isAllowDrawing = false
+                binding.mainContent.isAllowDrawing = true
                 binding.toolContent.visibility = View.GONE
             } else {
-                binding.mainContent.isAllowDrawing = true
+                binding.mainContent.isAllowDrawing = false
                 binding.toolContent.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun initToolViewPage() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.tool_content_panel, toolContentPanel, toolContentPanel::class.java.simpleName)
+            .commit()
     }
 
     private fun setToolContentAnima(view: View) {

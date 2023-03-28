@@ -23,7 +23,6 @@
         android:id="@+id/tool_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:elevation="5dp"
         android:orientation="vertical">
 
@@ -41,7 +40,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/textview_border"
                 android:gravity="center"
-                android:text="画笔工具" />
+                android:text="工具" />
 
             <TextView
                 android:id="@+id/tool_nav_save"
@@ -94,13 +93,13 @@
             android:id="@+id/tool_content"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="#D51919"
+            android:orientation="vertical"
             android:visibility="gone">
 
-            <TextView
+            <FrameLayout
+                android:id="@+id/tool_content_panel"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="工具栏的内容" />
+                android:layout_height="match_parent" />
         </LinearLayout>
 
     </LinearLayout>
