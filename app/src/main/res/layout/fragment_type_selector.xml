@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".tools.fragment.TypeSelectorFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/type_selector_rec"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#3EB8AD"
-        android:text="类型选择面板" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

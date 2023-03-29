@@ -5,17 +5,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import posserldm.doodle.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import posserldm.doodle.databinding.FragmentWidthSelectorBinding
+import posserldm.doodle.tools.adapter.WidthSelectorAdapter
 
 class WidthSelectorFragment : Fragment() {
 
+    private var binding: FragmentWidthSelectorBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_width_selector, container, false)
+        binding = FragmentWidthSelectorBinding.inflate(inflater, container, false)
+        initRecycleView()
+        return binding?.root
+    }
+
+    private fun initRecycleView() {
+        binding?.let {
+            it.widthSelectorRec.adapter = WidthSelectorAdapter()
+            it.widthSelectorRec.layoutManager = LinearLayoutManager(this@WidthSelectorFragment.context).apply {
+                orientation = RecyclerView.VERTICAL
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }

@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".tools.fragment.WidthSelectorFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/width_selector_rec"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#6926E1"
-        android:text="笔宽选择面板" />
+        android:layout_height="match_parent" />
 </FrameLayout>
