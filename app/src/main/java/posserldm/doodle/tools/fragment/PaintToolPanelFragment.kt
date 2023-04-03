@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import posserldm.doodle.databinding.FragmentPaintToolPanelBinding
 import posserldm.doodle.tools.adapter.PaintToolPanelAdapter
+import posserldm.doodle.tools.viewmodel.ColorSelectorVM
 
 
 class PaintToolPanelFragment : Fragment() {
@@ -25,7 +27,8 @@ class PaintToolPanelFragment : Fragment() {
 
     private fun initViewPage() {
         binding?.let {
-            it.paintToolViewPage.adapter = PaintToolPanelAdapter(this@PaintToolPanelFragment)
+            val adapter = PaintToolPanelAdapter(this@PaintToolPanelFragment)
+            it.paintToolViewPage.adapter = adapter
         }
     }
 
