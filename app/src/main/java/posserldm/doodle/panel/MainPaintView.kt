@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import java.io.File
 import java.io.IOException
+import kotlin.math.absoluteValue
 
 class MainPaintView @JvmOverloads constructor(
     context: Context,
@@ -48,6 +49,10 @@ class MainPaintView @JvmOverloads constructor(
     private val drawLines = mutableListOf(DrawLine(Path(), createPaint()).apply {
         drawActions.add(DrawAction(createPaint()))
     })
+
+    // 导入的背景图片
+    private var bgImage: Bitmap? = null
+    private var bgImagePaint = Paint()
 
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -85,6 +90,9 @@ class MainPaintView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        bgImage?.let {
+            canvas.drawBitmap(it, 0f, 0f, bgImagePaint)
+        }
         drawLines.forEach {
             canvas.drawPath(it.ownerPath, it.ownerPaint)
         }
@@ -101,6 +109,7 @@ class MainPaintView @JvmOverloads constructor(
         drawLines.add(DrawLine(Path(), tmpPaint).apply {
             drawActions.add(DrawAction(tmpPaint))
         })
+        bgImage = null
         invalidate()
     }
 
@@ -121,6 +130,21 @@ class MainPaintView @JvmOverloads constructor(
             }
         }
         invalidate()
+    }
+
+    fun setBackgroundImage(bitmap: Bitmap) {
+        /**
+         * 为了避免背景的图片变形，只把比屏幕大的和如屏幕比例相近的缩放成屏幕大小
+         */
+        bgImage = if ((bitmap.width * 1.0 / bitmap.height - width * 1.0 / height).absoluteValue <= 0.1
+            || (bitmap.width > width && bitmap.height > height)) {
+            Bitmap.createScaledBitmap(bitmap, width, height, true)
+        } else if (bitmap.width >= this.width) {
+            Bitmap.createScaledBitmap(bitmap, width, bitmap.height, true)
+        } else if (bitmap.height >= this.height) {
+            Bitmap.createScaledBitmap(bitmap, bitmap.width, height, true)
+        } else { bitmap }
+
     }
 
 
@@ -166,15 +190,22 @@ class MainPaintView @JvmOverloads constructor(
         setColor(beforeEraserPaintColor)
     }
 
-    fun getBitmap(): Bitmap {
+    fun saveImage() {
+        val bitmap = getBitmap()
+        saveImageToGallery(bitmap)
+    }
+
+    private fun getBitmap(): Bitmap {
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
+        canvas.drawColor(Color.WHITE)
+        layout(0, 0, width, height)
         draw(canvas)
         return bitmap
     }
 
     private fun saveImageToGallery(bitmap: Bitmap) {
-        val fileName = "${System.currentTimeMillis()}.jpg"
+        val fileName = "${System.currentTimeMillis()}.png"
         val contentValues = ContentValues().apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
             put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
