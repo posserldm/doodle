@@ -11,6 +11,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.RoundedCorner
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
@@ -20,7 +21,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import posserldm.doodle.databinding.ActivityMainBinding
+import posserldm.doodle.dialog.ShareDialogBuilder
 import posserldm.doodle.dialog.buildSaveImgAlterDialog
 import posserldm.doodle.tools.fragment.PaintToolPanelFragment
 import posserldm.doodle.tools.viewmodel.ColorSelectorVM
@@ -56,6 +61,18 @@ class MainActivity : AppCompatActivity() {
         requestPermissions()
         imageLauncher = registerForImageActivity()
         // here are test code
+        initUserIcon()
+    }
+
+    // 写一个用glide实现把图片变成圆形的方法，方法名为 initCircle
+
+
+    private fun initUserIcon() {
+        // val option = RequestOptions.bitmapTransform(RoundedCorner(25))
+        Glide.with(this)
+            .load(R.drawable.wx_icon)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .into(binding.mainUserIcon)
     }
 
     private fun initVMs() {
@@ -137,6 +154,11 @@ class MainActivity : AppCompatActivity() {
         // 导入功能
         binding.toolNavIntroduce.setOnClickListener {
             imageLauncher.launch("image/*")
+        }
+
+        // 分享功能
+        binding.mainTitleShare.setOnClickListener {
+            ShareDialogBuilder(this).show()
         }
     }
 

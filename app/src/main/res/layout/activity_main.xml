@@ -6,6 +6,36 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="#6200EE">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/main_user_icon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/user_icon_round"
+                android:src="@drawable/qq_icon"/>
+
+            <TextView
+                android:id="@+id/main_title_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/ic_baseline_share"
+                android:gravity="center_vertical" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
     <LinearLayout
         android:id="@+id/main_panel"
         android:layout_width="match_parent"

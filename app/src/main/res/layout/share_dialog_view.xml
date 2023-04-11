@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="分享到:"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/wx_share_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/share_icon_height"
+            android:layout_weight="1"
+            android:src="@drawable/wx_icon" />
+
+        <ImageView
+            android:id="@+id/wx_pyq_share_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/share_icon_height"
+            android:layout_weight="1"
+            android:src="@drawable/wx_pyq_icon" />
+
+        <ImageView
+            android:id="@+id/qq_share_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/share_icon_height"
+            android:layout_weight="1"
+            android:src="@drawable/qq_icon" />
+
+        <ImageView
+            android:id="@+id/qq_zone_share_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/share_icon_height"
+            android:layout_weight="1"
+            android:src="@drawable/qq_zone_icon" />
+    </LinearLayout>
+
+</LinearLayout>
