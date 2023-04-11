@@ -31,6 +31,9 @@ class ShareDialogBuilder(
         dialog = buildDialog()
     }
 
+    /**
+     * 因为开发者权限申请失败，功能暂时没有实现
+     */
     private fun initEvents() {
         // 分享到qq好友功能
         qqShareBtn.setOnClickListener {
@@ -73,7 +76,9 @@ class ShareDialogBuilder(
         val dialog = Dialog(context)
         dialog.setContentView(view)
         dialog.window?.let {
+            // 设置弹出方向
             it.setGravity(Gravity.BOTTOM)
+            // 设置自定义view的大小
             it.attributes.width = WindowManager.LayoutParams.MATCH_PARENT
             // it.attributes.height = 500
             // it.setBackgroundDrawableResource(android.R.color.transparent)
